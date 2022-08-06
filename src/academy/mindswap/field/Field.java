@@ -11,8 +11,8 @@ import com.googlecode.lanterna.terminal.Terminal;
 public final class Field {
 
     private static final String BORDER_STRING = "▒";
-    private static final String SNAKE_BODY_STRING = "#";
-    private static final String SNAKE_HEAD_STRING = "0";
+    private static final String SNAKE_BODY_STRING = "X";
+    private static final String SNAKE_HEAD_STRING = "O";
     private static final String FRUIT_STRING = "@";
 
     private static int width;
@@ -20,8 +20,10 @@ public final class Field {
     private static Screen screen;
     private static ScreenWriter screenWriter;
 
+
     private Field() {
     }
+
 
     public static void init(int width, int height) {
 
@@ -71,10 +73,14 @@ public final class Field {
             screenWriter.drawString(i, height - 1, BORDER_STRING);
         }
 
+
         for (int j = 0; j < height; j++) {
             screenWriter.drawString(0, j, BORDER_STRING);
             screenWriter.drawString(width - 1, j, BORDER_STRING);
         }
+    }
+    public static void drawScoreCard(int score){
+        screenWriter.drawString(30, 0, "Score: " + score);
     }
 
     public static Key readInput() {
@@ -82,7 +88,7 @@ public final class Field {
     }
 
     public static void drawFruit(Fruit fruit) {
-        screen.putString(fruit.getPosition().getCol(), fruit.getPosition().getRow(), FRUIT_STRING, Terminal.Color.MAGENTA, null);
+        screen.putString(fruit.getPosition().getCol(), fruit.getPosition().getRow(), FRUIT_STRING, Terminal.Color.RED ,null);
     }
 
     public static int getWidth() {
