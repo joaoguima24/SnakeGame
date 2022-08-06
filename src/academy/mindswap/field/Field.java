@@ -1,6 +1,7 @@
 package academy.mindswap.field;
 
 import academy.mindswap.gameobjects.fruit.Fruit;
+import academy.mindswap.gameobjects.mouse.Mouse;
 import academy.mindswap.gameobjects.snake.Snake;
 import com.googlecode.lanterna.TerminalFacade;
 import com.googlecode.lanterna.input.Key;
@@ -83,12 +84,24 @@ public final class Field {
         screenWriter.drawString(30, 0, "Score: " + score);
     }
 
+    public static void drawFinalScore(String reason, int score){
+        screenWriter.drawString(30, 15, reason + score);
+    }
+
     public static Key readInput() {
         return screen.readInput();
     }
 
     public static void drawFruit(Fruit fruit) {
         screen.putString(fruit.getPosition().getCol(), fruit.getPosition().getRow(), FRUIT_STRING, Terminal.Color.RED ,null);
+    }
+
+    public static void drawMouse(Mouse mouse) {
+        screen.putString(mouse.getPosition().getCol(), mouse.getPosition().getRow(), "§", Terminal.Color.YELLOW ,null);
+    }
+    public static void clearMouseTail(Mouse mouse) {
+        Position tail = mouse.getTailPosition();
+        screen.putString(tail.getCol(), tail.getRow(), " ", null, null);
     }
 
     public static int getWidth() {
