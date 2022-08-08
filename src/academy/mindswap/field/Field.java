@@ -83,6 +83,9 @@ public final class Field {
     public static void drawScoreCard(int score){
         screenWriter.drawString(30, 0, "Score: " + score);
     }
+    public static void drawHighscore(int score){
+        screenWriter.drawString(50, 0, "Best score: " + score);
+    }
 
     public static void drawFinalScore(String reason, int score){
         screenWriter.drawString(30, 15, reason + score);
@@ -97,10 +100,14 @@ public final class Field {
     }
 
     public static void drawMouse(Mouse mouse) {
-        screen.putString(mouse.getPosition().getCol(), mouse.getPosition().getRow(), "§", Terminal.Color.YELLOW ,null);
+        screen.putString(mouse.getPosition().getCol(), mouse.getPosition().getRow(), "ᐷ", Terminal.Color.YELLOW ,null);
     }
     public static void clearMouseTail(Mouse mouse) {
         Position tail = mouse.getTailPosition();
+        screen.putString(tail.getCol(), tail.getRow(), " ", null, null);
+    }
+    public static void clearMouse(Mouse mouse) {
+        Position tail = mouse.getPosition();
         screen.putString(tail.getCol(), tail.getRow(), " ", null, null);
     }
 

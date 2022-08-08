@@ -30,10 +30,14 @@ public class Snake {
         snakeSize++;
     }
 
+    public Direction getDirection() {
+        return direction;
+    }
+
     public void move(Direction direction) {
         int headRow = getHead().getRow();
         int headCol = getHead().getCol();
-
+        Direction lastDirection = this.direction;
         this.direction=direction;
 
         if (direction == Direction.UP){

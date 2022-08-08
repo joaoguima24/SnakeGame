@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ee0701df-c266-468f-812e-b696e64e5779" name="Changes" comment="Snake running, with score card">
-      <change afterPath="$PROJECT_DIR$/src/academy/mindswap/gameobjects/mouse/Mouse.java" afterDir="false" />
+    <list default="true" id="ee0701df-c266-468f-812e-b696e64e5779" name="Changes" comment="Score card, messages in the end of the game, mouse that generate extra points and subtract points if eat our apple">
+      <change afterPath="$PROJECT_DIR$/src/academy/mindswap/highscore.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/academy/mindswap/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/academy/mindswap/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/academy/mindswap/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/academy/mindswap/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/academy/mindswap/field/Field.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/academy/mindswap/field/Field.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/academy/mindswap/gameobjects/snake/Snake.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/academy/mindswap/gameobjects/snake/Snake.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,9 +40,6 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///Dummy.txt" root0="SKIP_HIGHLIGHTING" />
-  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -57,7 +56,6 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
@@ -106,7 +104,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659800568957</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Score card, messages in the end of the game, mouse that generate extra points and subtract points if eat our apple">
+      <created>1659810098063</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1659810098063</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -135,6 +140,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Snake Skeleton" />
     <MESSAGE value="Snake running, with score card" />
-    <option name="LAST_COMMIT_MESSAGE" value="Snake running, with score card" />
+    <MESSAGE value="Score card, messages in the end of the game, mouse that generate extra points and subtract points if eat our apple" />
+    <option name="LAST_COMMIT_MESSAGE" value="Score card, messages in the end of the game, mouse that generate extra points and subtract points if eat our apple" />
   </component>
 </project>

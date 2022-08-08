@@ -7,14 +7,18 @@ import academy.mindswap.gameobjects.snake.Direction;
 import academy.mindswap.gameobjects.snake.Snake;
 import com.googlecode.lanterna.input.Key;
 
+import java.io.*;
+
 
 public class Game {
 
     private Snake snake;
     private Fruit fruit;
     private int delay;
-    public int score;
+    private int score;
     private Mouse mouse;
+    private int highScore;
+    private boolean restart;
 
     public Game(int cols, int rows, int delay) {
         Field.init(cols, rows);
@@ -23,10 +27,11 @@ public class Game {
         this.fruit = new Fruit();
     }
 
-    public void start() throws InterruptedException {
+    public void start() throws InterruptedException, IOException {
         generateFruit();
         generateMouse();
         Field.drawScoreCard(score);
+        Field.drawHighscore(highScore);
 
         while (true) {
             if(!checkDeadlyCollisions()){
@@ -42,7 +47,24 @@ public class Game {
             Field.drawMouse(mouse);
             Field.clearMouseTail(mouse);
         }
+        checkHighScore();
+    }
 
+    public void checkHighScore() throws IOException {
+        BufferedReader checkHighScore = new BufferedReader(
+                new FileReader("/Users/guimaj/Documents/Mindswap/Snake/src/academy/mindswap/highscore.txt"));
+        String readHighScore = checkHighScore.readLine();
+        this.highScore = Integer.parseInt(readHighScore);
+        setHighScore();
+    }
+
+    private void setHighScore() throws IOException {
+        if (highScore < score){
+            BufferedWriter setHighScore = new BufferedWriter(
+                    new FileWriter("/Users/guimaj/Documents/Mindswap/Snake/src/academy/mindswap/highscore.txt"));
+            setHighScore.write(""+score);
+            setHighScore.close();
+        }
     }
 
     private void moveMouse() {
@@ -63,31 +85,37 @@ public class Game {
 
     }
 
-    private void moveSnake() {
+    private void moveSnake() throws IOException, InterruptedException {
 
         Key k = Field.readInput();
 
         if (k != null) {
             switch (k.getKind()) {
                 case ArrowUp:
-                    snake.move(Direction.UP);
-                    return;
-
+                    if (snake.getDirection() != Direction.DOWN){
+                        snake.move(Direction.UP);
+                        return;
+                    }
                 case ArrowDown:
-                    snake.move(Direction.DOWN);
-                    return;
-
+                    if (snake.getDirection() != Direction.UP){
+                        snake.move(Direction.DOWN);
+                        return;
+                    }
                 case ArrowLeft:
-                    snake.move(Direction.LEFT);
-                    return;
-
+                    if (snake.getDirection() != Direction.RIGHT){
+                        snake.move(Direction.LEFT);
+                        return;
+                    }
                 case ArrowRight:
-                    snake.move(Direction.RIGHT);
-                    return;
+                    if (snake.getDirection() != Direction.LEFT){
+                        snake.move(Direction.RIGHT);
+                        return;
+                    }
             }
         }
         snake.move();
     }
+
 
     private boolean checkDeadlyCollisions() {
         if(snake.getHead().getCol() == 0 || snake.getHead().getCol() == Field.getWidth()-1){
@@ -108,23 +136,19 @@ public class Game {
         return true;
     }
 
-
-
     private void checkCollisionsThatChangeScore() {
         if(snake.getHead().equals(fruit.getPosition())){
             generateFruit();
             snake.increaseSize();
             increaseDifficultyLevel();
-            this.score++;
+            increaseScore(1);
+            return;
         }
         if (mouse.getPosition().equals(fruit.getPosition())){
             generateFruit();
             increaseDifficultyLevel();
-            score -= 10;
-            if (score < 0){
-                score = 0;
-            }
-
+           decreaseScore(10);
+            return;
         }
         if (snake.getHead().equals(mouse.getPosition())){
             mouse.die();
@@ -132,10 +156,31 @@ public class Game {
             snake.increaseSize();
             snake.increaseSize();
             snake.increaseSize();
-            this.score += 5;
-
+            increaseScore(5);
+            return;
+        }
+        for (int i = 1; i < snake.getSnakeSize(); i++) {
+            if (snake.getFullSnake().get(i).equals(mouse.getPosition())){
+                decreaseScore(5);
+                mouse.die();
+                Field.clearMouse(mouse);
+                Field.clearMouseTail(mouse);
+               generateMouse();
+               return;
+            }
         }
         Field.drawScoreCard(score);
     }
+
+    private void decreaseScore(int amount) {
+        score-=amount;
+        if (score < 0){
+            score = 0;
+        }
+    }
+    private void increaseScore(int amount) {
+        this.score += amount;
+    }
+
 }
 
